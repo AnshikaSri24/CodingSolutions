@@ -1,0 +1,56 @@
+Given 2 big integers (as strings received from user input), write your own algorithm to add them
+up and print the result. Do not use existing data structures.
+Note : The number of digits in string input can range from 1 digit to 100 digits
+Example:
+Input: “53283697”, “785”
+Output: 53284482
+using System;
+
+public class HelloWorld
+{
+    public static void Main(string[] args)
+    {
+        
+        string input1 = "53283697";
+        string input2 = "785";
+        
+        string checkString = input1.Length > input2.Length ? input1 : input2;
+        
+        int diff = input1.Length > input2.Length ? input1.Length - input2.Length : input2.Length - input1.Length;
+        string tempDiffString = string.Empty;
+        for(int i = 0;i< diff;i++)
+        {
+            tempDiffString += "0";
+        }
+        if(input1.Length < input2.Length)
+        {
+            input1 = tempDiffString + input1;
+        }
+        else
+        {
+            input2 = tempDiffString + input2;
+        }
+       
+        var inputArray1 = input1.ToCharArray();
+        var inputArray2 = input2.ToCharArray();
+        int tempSave = 0;
+        string output = string.Empty;
+        for(int i = checkString.Length-1; i>= 0; i--)
+        {
+            int sum = tempSave + int.Parse(inputArray1[i].ToString()) + int.Parse(inputArray2[i].ToString());
+            
+            int mod = sum %10;
+            output =  Convert.ToString(mod) + output;
+            
+            tempSave = sum/10;
+        }
+        if(tempSave > 0)
+        {
+        Console.WriteLine("Output= " + Convert.ToString(tempSave) + output);
+        }
+        else{
+            Console.WriteLine("Output= " + output);
+        }
+        
+    }
+}
